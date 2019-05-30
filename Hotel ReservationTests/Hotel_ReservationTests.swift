@@ -11,24 +11,27 @@ import XCTest
 
 class Hotel_ReservationTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    //MARK: Room Class Tests
+    
+    // Confirm that the Room initializer returns a Room object when passed valid parameters
+    func testRoomInitializationSucceeds() {
+        let room = Room.init(number: 1, type: "Single", price: 3.4)
+        XCTAssertNotNil(room)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    // Confirm that the Room initializer returns nil when passed invalid parameters
+    func testRoomInitializationFails() {
+        
+        // Non-positive number
+        let nonPositiveNumberRoom = Room.init(number: 0, type: "Single", price: 3.4)
+        XCTAssertNil(nonPositiveNumberRoom)
+        
+        // Empty type
+        let emptyTypeRoom = Room.init(number: 1, type: "", price: 3.4)
+        XCTAssertNil(emptyTypeRoom)
+        
+        // Non-positive price
+        let nonPositivePriceRoom = Room.init(number: 1, type: "Single", price: 0)
+        XCTAssertNil(nonPositivePriceRoom)
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
