@@ -15,10 +15,13 @@ class Room {
     var number: Int
     var type: String
     var price: Double
+    var hasJacuzzi: Bool
+    var hasSwimming: Bool
+    var hasMeal: Bool
     
     //MARK: Initialization
     
-    init?(number: Int, type: String, price: Double) {
+    init?(number: Int, type: String, price: Double, hasJacuzzi: Bool, hasSwimming: Bool, hasMeal: Bool) {
         
         // Number must be positive
         guard number > 0 else {
@@ -38,5 +41,8 @@ class Room {
         self.number = number
         self.type = type
         self.price = price
+        self.hasJacuzzi = hasJacuzzi
+        self.hasSwimming = hasSwimming
+        self.hasMeal = hasMeal
     }
 }
