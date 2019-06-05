@@ -8,32 +8,29 @@
 
 import UIKit
 
-class Room {
+struct Room {
     
-    //MARK: Properties
+    // MARK: - Properties
     
     var number: Int
     var type: String
     var price: Double
-    var hasJacuzzi: Bool
-    var hasSwimming: Bool
-    var hasMeal: Bool
     
-    //MARK: Initialization
+    // MARK: - Initialization
     
-    init?(number: Int, type: String, price: Double, hasJacuzzi: Bool, hasSwimming: Bool, hasMeal: Bool) {
+    init?(number: Int, type: String, price: Double) {
         
-        // Number must be positive
+        // The number must be positive
         guard number > 0 else {
             return nil
         }
         
-        // Type must not be empty
+        // The type must not be empty
         guard !type.isEmpty else {
             return nil
         }
         
-        // Price must be positive
+        // The price must be positive
         guard price > 0 else {
             return nil
         }
@@ -41,8 +38,5 @@ class Room {
         self.number = number
         self.type = type
         self.price = price
-        self.hasJacuzzi = hasJacuzzi
-        self.hasSwimming = hasSwimming
-        self.hasMeal = hasMeal
     }
 }
