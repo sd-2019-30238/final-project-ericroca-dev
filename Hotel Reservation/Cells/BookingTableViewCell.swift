@@ -14,7 +14,7 @@ class BookingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var roomLabel: UILabel!
 
-    func populate(room: Room) {
-        cell.roomLabel.text = "Room " + String(room.number)
+    func populate(booking: Booking) {
+        roomLabel.text = "Room " + String(booking.room)
     }
 }

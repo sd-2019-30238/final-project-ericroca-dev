@@ -32,7 +32,7 @@ struct Booking {
             return nil
         }
         
-        self.user = uesr
+        self.user = user
         self.room = room
         self.hasJacuzzi = hasJacuzzi
         self.hasSwimming = hasSwimming

@@ -16,8 +16,8 @@ class RoomTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     
     func populate(room: Room) {
-        cell.numberLabel.text = "Room " + String(room.number)
-        cell.typeLabel.text = room.type
-        cell.priceLabel.text = String(format: "%.0f", room.price) + " lei"
+        numberLabel.text = "Room " + String(room.number)
+        typeLabel.text = room.type
+        priceLabel.text = String(format: "%.0f", room.price) + " lei"
     }
 }
