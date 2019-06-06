@@ -52,6 +52,8 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
             let authViewController = authUI!.authViewController()
             self.present(authViewController, animated: true, completion: nil)
         }
+        
+        self.tableView.reloadData()
     }
     
     // MARK: - Table View Data Source
@@ -86,10 +88,46 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
         return cell
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "ChooseAccommodations" {
+            guard let accommodationsTableViewController = segue.destination as? AccommodationsTableViewController else {
+                fatalError("Unexpected destination: \(segue.destination).")
+            }
+                    
+            guard let selectedRoomCell = sender as? RoomTableViewCell else {
+                fatalError("Unexpected sender: \(sender).")
+            }
+                    
+            guard let indexPath = tableView.indexPath(for: selectedRoomCell) else {
+                fatalError("The selected cell is not being displayed by the table.")
+            }
+                    
+            let selectedRoom: Room
+                    
+            selectedRoom = rooms[indexPath.row]
+                    
+            print("Selected: \(selectedRoom.price)")
+                    
+            accommodationsTableViewController.room = selectedRoom
+        }
+    }
+    
     // MARK: - FirebaseUI
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         // Handle user returning from authenticating
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func unwindToRoomList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? BookingDetailsTableViewController {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Private Methods

@@ -17,10 +17,12 @@ struct Booking {
     var hasJacuzzi: Bool
     var hasSwimming: Bool
     var hasMeal: Bool
+    var roomPrice: Double
+    var totalPrice: Double
     
     // MARK: - Initialization
     
-    init?(user: String, room: Int, hasJacuzzi: Bool, hasSwimming: Bool, hasMeal: Bool) {
+    init?(user: String, room: Int, hasJacuzzi: Bool, hasSwimming: Bool, hasMeal: Bool, roomPrice: Double, totalPrice: Double) {
         
         // The user ID must not be empty
         guard !user.isEmpty else {
@@ -32,10 +34,22 @@ struct Booking {
             return nil
         }
         
+        // The room price must be positive
+        guard roomPrice > 0 else {
+            return nil
+        }
+        
+        // The total price must be positive
+        guard totalPrice > 0 else {
+            return nil
+        }
+        
         self.user = user
         self.room = room
         self.hasJacuzzi = hasJacuzzi
         self.hasSwimming = hasSwimming
         self.hasMeal = hasMeal
+        self.roomPrice = roomPrice
+        self.totalPrice = totalPrice
     }
 }

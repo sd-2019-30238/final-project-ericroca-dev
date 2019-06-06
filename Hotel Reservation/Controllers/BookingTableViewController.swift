@@ -35,6 +35,11 @@ class BookingTableViewController: UITableViewController {
         
         loadBookingsFromFirestore()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
 
     // MARK: - Table View Data Source
 
@@ -80,8 +85,10 @@ class BookingTableViewController: UITableViewController {
                     let hasJacuzzi = document.get("hasJacuzzi") as! Bool
                     let hasSwimming = document.get("hasSwimming") as! Bool
                     let hasMeal = document.get("hasMeal") as! Bool
+                    let roomPrice = document.get("roomPrice") as! Double
+                    let totalPrice = document.get("totalPrice") as! Double
                     
-                    let booking = Booking(user: user, room: room, hasJacuzzi: hasJacuzzi, hasSwimming: hasSwimming, hasMeal: hasMeal)
+                    let booking = Booking(user: user, room: room, hasJacuzzi: hasJacuzzi, hasSwimming: hasSwimming, hasMeal: hasMeal, roomPrice: roomPrice, totalPrice: totalPrice)
                     
                     self.bookings.append(booking!)
                     self.tableView.reloadData()
