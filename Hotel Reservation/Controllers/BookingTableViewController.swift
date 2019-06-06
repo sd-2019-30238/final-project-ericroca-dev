@@ -32,13 +32,12 @@ class BookingTableViewController: UITableViewController {
         
         // Firebase Cloud Firestore initialization
         db = Firestore.firestore()
-        
-        loadBookingsFromFirestore()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.reloadData()
+        bookings.removeAll()
+        loadBookingsFromFirestore()
     }
 
     // MARK: - Table View Data Source
@@ -69,6 +68,32 @@ class BookingTableViewController: UITableViewController {
         cell.roomLabel.sizeToFit()
         
         return cell
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "ShowUserBooking" {
+            guard let userBookingTableViewController = segue.destination as? UserBookingTableViewController else {
+                fatalError("Unexpected destination: \(segue.destination).")
+            }
+            
+            guard let selectedBookingCell = sender as? BookingTableViewCell else {
+                fatalError("Unexpected sender: \(sender).")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedBookingCell) else {
+                fatalError("The selected cell is not being displayed by the table.")
+            }
+            
+            let selectedBooking: Booking
+            
+            selectedBooking = bookings[indexPath.row]
+            
+            userBookingTableViewController.booking = selectedBooking
+        }
     }
     
     // MARK: - Private Methods

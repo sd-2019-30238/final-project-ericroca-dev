@@ -32,8 +32,6 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
         
         // Firebase Cloud Firestore initialization
         db = Firestore.firestore()
-        
-        loadRoomsFromFirestore()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +51,8 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
             self.present(authViewController, animated: true, completion: nil)
         }
         
-        self.tableView.reloadData()
+        rooms.removeAll()
+        loadRoomsFromFirestore()
     }
     
     // MARK: - Table View Data Source
@@ -110,8 +109,6 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
                     
             selectedRoom = rooms[indexPath.row]
                     
-            print("Selected: \(selectedRoom.price)")
-                    
             accommodationsTableViewController.room = selectedRoom
         }
     }
@@ -126,7 +123,8 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
     
     @IBAction func unwindToRoomList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? BookingDetailsTableViewController {
-            self.tableView.reloadData()
+            rooms.removeAll()
+            loadRoomsFromFirestore()
         }
     }
     
@@ -134,7 +132,7 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
     
     private func loadRoomsFromFirestore() {
         var objFetched = 0
-        db!.collection("rooms").getDocuments() { (querySnapshot, err) in
+        db!.collection("rooms").whereField("isAvailable", isEqualTo: true).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -142,8 +140,9 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
                     let number = document.get("number") as! Int
                     let type = document.get("type") as! String
                     let price = document.get("price") as! Double
+                    let isAvailable = document.get("isAvailable") as! Bool
                     
-                    let room = Room(number: number, type: type, price: price)
+                    let room = Room(number: number, type: type, price: price, isAvailable: isAvailable)
                     
                     self.rooms.append(room!)
                     self.tableView.reloadData()
