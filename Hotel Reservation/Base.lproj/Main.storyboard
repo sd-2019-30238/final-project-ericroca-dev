@@ -485,7 +485,7 @@
         <scene sceneID="yZq-b4-EDN">
             <objects>
                 <navigationController storyboardIdentifier="firstNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="EGx-TY-sE3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Rooms" id="RYY-0N-not"/>
+                    <tabBarItem key="tabBarItem" title="Rooms" image="icons8-bedroom-filled-60" selectedImage="icons8-bedroom-filled-60" id="RYY-0N-not"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Noi-2O-BGb">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -523,7 +523,7 @@
         <scene sceneID="Oau-sK-UpA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H4f-bz-OBm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bookings" id="IgH-F6-ZWN"/>
+                    <tabBarItem key="tabBarItem" title="Bookings" image="icons8-hotel-check-in-filled-60" selectedImage="icons8-hotel-check-in-filled-60" id="IgH-F6-ZWN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="uyJ-vJ-GM5">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -760,4 +760,8 @@
             <point key="canvasLocation" x="4224.6376811594209" y="866.51785714285711"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-bedroom-filled-60" width="30" height="30"/>
+        <image name="icons8-hotel-check-in-filled-60" width="30" height="30"/>
+    </resources>
 </document>
