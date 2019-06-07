@@ -70,7 +70,13 @@
                             <outlet property="delegate" destination="bab-FZ-HMH" id="FEz-da-Ily"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Available Rooms" id="4dk-Kq-fan"/>
+                    <navigationItem key="navigationItem" title="Available Rooms" id="4dk-Kq-fan">
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="VjW-d9-auN">
+                            <connections>
+                                <action selector="signOut:" destination="bab-FZ-HMH" id="frb-VT-c1S"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhI-5O-Lnx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -478,7 +484,7 @@
         <!--Rooms-->
         <scene sceneID="yZq-b4-EDN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EGx-TY-sE3" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="firstNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="EGx-TY-sE3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Rooms" id="RYY-0N-not"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Noi-2O-BGb">

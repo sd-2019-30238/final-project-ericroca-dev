@@ -20,6 +20,7 @@
 		8AE87CD622A96C820074E13A /* AccommodationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE87CD522A96C820074E13A /* AccommodationsTableViewController.swift */; };
 		8AE87CD822A979210074E13A /* BookingDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE87CD722A979210074E13A /* BookingDetailsTableViewController.swift */; };
 		8AE87CDA22A9BFFD0074E13A /* UserBookingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE87CD922A9BFFD0074E13A /* UserBookingTableViewController.swift */; };
+		8AE87CDE22A9CB1B0074E13A /* AdminRoomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE87CDD22A9CB1B0074E13A /* AdminRoomTableViewController.swift */; };
 		8AED9D2C22A84AD90056EF06 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED9D2B22A84AD90056EF06 /* RoomTableViewCell.swift */; };
 		8AED9D3022A85B0A0056EF06 /* BookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED9D2F22A85B0A0056EF06 /* BookingTableViewCell.swift */; };
 		8AED9D3222A85BF00056EF06 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AED9D3122A85BF00056EF06 /* Booking.swift */; };
@@ -56,6 +57,7 @@
 		8AE87CD522A96C820074E13A /* AccommodationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccommodationsTableViewController.swift; sourceTree = "<group>"; };
 		8AE87CD722A979210074E13A /* BookingDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsTableViewController.swift; sourceTree = "<group>"; };
 		8AE87CD922A9BFFD0074E13A /* UserBookingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBookingTableViewController.swift; sourceTree = "<group>"; };
+		8AE87CDD22A9CB1B0074E13A /* AdminRoomTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRoomTableViewController.swift; sourceTree = "<group>"; };
 		8AED9D2B22A84AD90056EF06 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		8AED9D2F22A85B0A0056EF06 /* BookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTableViewCell.swift; sourceTree = "<group>"; };
 		8AED9D3122A85BF00056EF06 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				8AE87CD522A96C820074E13A /* AccommodationsTableViewController.swift */,
 				8AE87CD722A979210074E13A /* BookingDetailsTableViewController.swift */,
 				8AE87CD922A9BFFD0074E13A /* UserBookingTableViewController.swift */,
+				8AE87CDD22A9CB1B0074E13A /* AdminRoomTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				8AED9D3022A85B0A0056EF06 /* BookingTableViewCell.swift in Sources */,
 				8AE87CD622A96C820074E13A /* AccommodationsTableViewController.swift in Sources */,
 				8AED9D3222A85BF00056EF06 /* Booking.swift in Sources */,
+				8AE87CDE22A9CB1B0074E13A /* AdminRoomTableViewController.swift in Sources */,
 				8AE87CDA22A9BFFD0074E13A /* UserBookingTableViewController.swift in Sources */,
 				8A31A5C1229FBA0D0035DEA1 /* RoomTableViewController.swift in Sources */,
 				8A31A5BF229FBA0D0035DEA1 /* AppDelegate.swift in Sources */,

@@ -18,11 +18,22 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
     var storageRef: StorageReference?
     var db: Firestore?
     
+    var filteredRooms = [Room]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Eliminate empty rows
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        // Search Controller setup
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Room"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         // Get a reference to the storage service using the default Firebase App
         storage = Storage.storage()
@@ -37,20 +48,8 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if Auth.auth().currentUser != nil {
-            //do something :D
-        } else {
-            let authUI = FUIAuth.defaultAuthUI()
-            authUI?.delegate = self
-            let providers: [FUIAuthProvider] = [
-                FUIEmailAuth(),
-            ]
-            
-            authUI?.providers = providers
-            let authViewController = authUI!.authViewController()
-            self.present(authViewController, animated: true, completion: nil)
-        }
-        
+        presentFirebaseUI()
+
         rooms.removeAll()
         loadRoomsFromFirestore()
     }
@@ -62,7 +61,11 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rooms.count
+        if isFiltering() {
+            return filteredRooms.count
+        } else {
+            return rooms.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +77,11 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
         let room: Room
         
         // Fetches the appropriate room for the data source layout
-        room = rooms[indexPath.row]
+        if isFiltering() {
+            room = filteredRooms[indexPath.row]
+        } else {
+            room = rooms[indexPath.row]
+        }
         
         cell.populate(room: room)
         
@@ -107,7 +114,11 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
                     
             let selectedRoom: Room
                     
-            selectedRoom = rooms[indexPath.row]
+            if isFiltering() {
+                selectedRoom = filteredRooms[indexPath.row]
+            } else {
+                selectedRoom = rooms[indexPath.row]
+            }
                     
             accommodationsTableViewController.room = selectedRoom
         }
@@ -127,6 +138,13 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
             loadRoomsFromFirestore()
         }
     }
+    
+    @IBAction func signOut(_ sender: UIBarButtonItem) {
+        try! Auth.auth().signOut()
+        
+        presentFirebaseUI()
+    }
+    
     
     // MARK: - Private Methods
     
@@ -155,5 +173,44 @@ class RoomTableViewController: UITableViewController, FUIAuthDelegate {
                 }
             }
         }
+    }
+    
+    private func presentFirebaseUI() {
+        if Auth.auth().currentUser == nil {
+            let authUI = FUIAuth.defaultAuthUI()
+            authUI?.delegate = self
+            let providers: [FUIAuthProvider] = [
+                FUIEmailAuth(),
+            ]
+            
+            authUI?.providers = providers
+            let authViewController = authUI!.authViewController()
+            self.present(authViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredRooms = rooms.filter({(room: Room) -> Bool in
+            return String(room.number).lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+}
+
+// MARK: - UISearchController
+
+extension RoomTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
 }
